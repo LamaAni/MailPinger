@@ -17,5 +17,7 @@ var email = {
   text: 'Ping tester'
 };
 
-var pinger=new (require('./pingclient.js'))('127.0.0.1', smtpConfig, email);
+target=process.argv.length<3 || process.argv[2]==null ? "127.0.0.1" : process.argv[2];
+console.log('Validating targer: '+target);
+var pinger=new (require('./pingclient.js'))(target, smtpConfig, email);
 pinger.startService();
