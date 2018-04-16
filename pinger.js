@@ -1,5 +1,10 @@
 //
+var target=process.argv.length<3 || process.argv[2]==null ? "127.0.0.1" : process.argv[2];
+var subject=process.argv.length<4 || process.argv[3]==null ? "Ping test failed." : process.argv[3];
+var msg=process.argv.length<5 || process.argv[4]==null ? "Ping test failed when testing pinger." : process.argv[4];
 var em='info@pgfarmhouse.com';
+console.log('Validating targer: '+target);
+
 var smtpConfig = {
     host: 'mail.gandi.net',
     port: 25,
@@ -13,11 +18,10 @@ var smtpConfig = {
 var email = {
   from: em,
   to: em,
-  subject: 'Ping tester Cycle',
-  text: 'Ping tester'
+  subject: subject,
+  text: msg
 };
 
-target=process.argv.length<3 || process.argv[2]==null ? "127.0.0.1" : process.argv[2];
-console.log('Validating targer: '+target);
+
 var pinger=new (require('./pingclient.js'))(target, smtpConfig, email);
 pinger.startService();

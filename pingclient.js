@@ -61,7 +61,7 @@ pingclient.prototype={
 				var fromLastSend=(new Date()).getTime()-me.LastErrorFound;
 				var waitUntilNextSend=me.MessageSendingIntervalTime-fromLastSend;
 				console.log("pingclient: Error checking ping, no response from "+me.checkIP+
-					".Email sent. Next email if persists in: "+Math.round(waitUntilNextSend/1000)+" [s]");
+					". Next email if error persists in: "+Math.round(waitUntilNextSend/1000)+" [s]");
 			}
 			else
 			{
@@ -75,6 +75,7 @@ pingclient.prototype={
 			((new Date()).getTime()-this.LastErrorFound>this.MessageSendingIntervalTime);
 		if(needErrorSend)
 		{
+			console.log("Sending email on failure...");
 			this.LastErrorFound=(new Date()).getTime();
 			var me=this;
 			setTimeout(function(){
