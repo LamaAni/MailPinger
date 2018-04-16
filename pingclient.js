@@ -65,6 +65,7 @@ pingclient.prototype={
 			}
 			else
 			{
+				me.LastErrorFound=-1;
 				console.log("Pingclient: "+me.checkIP+" OK.");
 			}
 			me.startService();
